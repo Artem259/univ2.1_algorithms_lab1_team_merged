@@ -1,6 +1,13 @@
 #include <cassert>
 #include "RationalMatrix.h"
 
+RationalMatrix::RationalMatrix()
+{
+    matrix = {};
+    rows = 0;
+    cols = 0;
+}
+
 RationalMatrix::RationalMatrix(const size_t &_rows, const size_t &_cols)
 {
     matrix = {};
@@ -38,16 +45,6 @@ void RationalMatrix::swapRows(const size_t &row1, const size_t &row2)
 {
     assert(row1<rows && row2<rows);
     swap(matrix[row1], matrix[row2]);
-}
-void RationalMatrix::fillRandom(const long long &n)
-{
-    for(auto &row: matrix)
-    {
-        for(auto &col: row)
-        {
-            col.random(n);
-        }
-    }
 }
 std::vector<Rational>& RationalMatrix::operator ()(const size_t &row)
 {

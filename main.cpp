@@ -69,7 +69,7 @@ bool Test_inverse_GaussJordan()
     */
     //-------------------------------------------------------------------------------------------------//
     RationalMatrix res(1,1);
-    std::cout<<"Section 1 [inverse_GaussJordan]"<<std::endl;
+    std::cout<<"Section 1 [inverse_GaussJordan]\n\n";
     for(size_t i=0; i<input.size(); i++)
     {
         std::cout<<"Test "<<i<<": ";
@@ -89,7 +89,7 @@ bool Test_inverse_GaussJordan()
             std::cout<<"Passed ("<<time.count()<<" ms)\n";
         }
     }
-    std::cout<<"Section passed\n\n";
+    std::cout<<"\nSection passed\n";
     return true;
 }
 bool Test_inverse_byLU()
@@ -150,7 +150,7 @@ bool Test_inverse_byLU()
                                              {{0,1},{0,1},{1,1}}} });
     //-------------------------------------------------------------------------------------------------//
     RationalMatrix res(1, 1);
-    std::cout<<"Section 1 [inverse_byLU]"<<std::endl;
+    std::cout<<"Section 1 [inverse_byLU]\n\n";
     for (size_t i = 0; i < input.size(); i++)
     {
         std::cout << "Test " << i << ": ";
@@ -170,13 +170,62 @@ bool Test_inverse_byLU()
             std::cout << "Passed (" << time.count() << " ms)\n";
         }
     }
-    std::cout << "Section passed\n\n";
+    std::cout << "\nSection passed\n";
+    return true;
+}
+bool Test_strassen_matrix_mul(int kMax, long long d)
+{
+    std::cout<<"Section 1 [strassen_matrix_mul]\n\n";
+    for (int k = 1; k <= kMax; k++)
+    {
+        std::cout << "Test " << k << ": ";
+        RationalMatrix mTest1(k, k);
+        mTest1.random(d);
+
+        RationalMatrix mTest2(k, k);
+        mTest2.random(d);
+
+        RationalMatrix mTest3(k, k);
+        auto start1 = std::chrono::high_resolution_clock::now();
+        normal_matrix_mul(mTest1, mTest2, mTest3);
+        auto end1 = std::chrono::high_resolution_clock::now();
+        auto time1 = std::chrono::duration_cast<std::chrono::milliseconds>(end1 - start1);
+
+        RationalMatrix mTest4(k, k);
+        auto start2 = std::chrono::high_resolution_clock::now();
+        strassen_matrix_mul(mTest1, mTest2, mTest4);
+        auto end2 = std::chrono::high_resolution_clock::now();
+        auto time2 = std::chrono::duration_cast<std::chrono::milliseconds>(end2 - start2);
+
+
+        std::cout << "Execution time of multiplication by normal algorithm: " << time1.count() << std::endl;
+        std::cout << "Execution time of multiplication by Strassen's algorithm: " << time2.count() << std::endl;
+
+        std::cout << "Equality: " << ((mTest3==mTest4)?"true":"false") << std::endl;
+
+        std::cout << "Test " << k-1 << ": ";
+        if(mTest3==mTest4)
+        {
+            std::cout << "Passed\n\n";
+        }
+        else
+        {
+            std::cout << "Failed\n\n";
+            return false;
+        }
+    }
+    std::cout << "\nSection passed\n";
     return true;
 }
 
 int main()
 {
-    Test_inverse_GaussJordan();
-    Test_inverse_byLU();
+    std::cout<<"----------------------------------------------------------------------------\n";
+    if(!Test_inverse_GaussJordan()) return 1;
+    std::cout<<"----------------------------------------------------------------------------\n";
+    if(!Test_inverse_byLU()) return 1;
+    std::cout<<"----------------------------------------------------------------------------\n";
+    if(!Test_strassen_matrix_mul(5, 12)) return 1;
+    std::cout<<"----------------------------------------------------------------------------\n";
     return 0;
 }
