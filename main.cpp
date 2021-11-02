@@ -206,11 +206,11 @@ bool Test_strassen_matrix_mul(int kMax, long long d)
         std::cout << "Test " << k-1 << ": ";
         if(mTest3==mTest4)
         {
-            std::cout << "Passed\n\n";
+            std::cout << "Passed\n";
         }
         else
         {
-            std::cout << "Failed\n\n";
+            std::cout << "Failed\n";
             return false;
         }
     }
