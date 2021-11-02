@@ -31,6 +31,7 @@ public:
     RationalMatrix inverse_byLU(); //повертає обернену матрицю, використовуючи метод LU-розкладу
     void col_L_inverse(RationalMatrix &L, std::vector<Rational>& E, std::vector<Rational>& Z, const size_t &rows);
     void col_A_inverse(RationalMatrix &U, std::vector<Rational>& Z, std::vector<Rational>& B, const size_t &rows);
+    bool matrix_isE(RationalMatrix& P, const size_t& rows);
     //---------------------------------------------------------------------------------------------------------------//
     //Кілко Павло
     void make(const size_t &n, const size_t &m);
