@@ -14,6 +14,11 @@ long long gcd(long long x, long long y) // Euclidean algorithm
     return gcd(y, x % y);
 }
 
+long long lcm(long long x, long long y)
+{
+    return (x*y)/gcd(x, y);
+}
+
 void reduction(long long &x, long long &y)
 {
     long long nod = gcd(x, y);
@@ -82,8 +87,8 @@ std::ostream& operator<< (std::ostream &out, const Rational &r)
 Rational operator + (const Rational &r1,const Rational &r2)
 {
     Rational r3;
-    r3.denominator = r1.denominator * r2.denominator;
-    r3.numerator = r1.numerator * r2.denominator + r2.numerator * r1.denominator;
+    r3.denominator = lcm(r1.denominator, r2.denominator);
+    r3.numerator = r1.numerator * (r3.denominator / r1.denominator) + r2.numerator * (r3.denominator / r2.denominator);
     reduction(r3.numerator, r3.denominator);
     return r3;
 }
@@ -91,28 +96,30 @@ Rational operator + (const Rational &r1,const Rational &r2)
 Rational operator - (const Rational &r1,const Rational &r2)
 {
     Rational r3;
-    r3.denominator = r1.denominator * r2.denominator;
-    r3.numerator = r1.numerator * r2.denominator - r2.numerator * r1.denominator;
+    r3.denominator = lcm(r1.denominator, r2.denominator);
+    r3.numerator = r1.numerator * (r3.denominator / r1.denominator) - r2.numerator * (r3.denominator / r2.denominator);
     reduction(r3.numerator, r3.denominator);
     return r3;
 }
 
 Rational operator * (const Rational &r1,const Rational &r2)
 {
-    Rational r3;
-    r3.denominator = r1.denominator * r2.denominator;
-    r3.numerator = r1.numerator * r2.numerator;
-    reduction(r3.numerator, r3.denominator);
-    return r3;
+    Rational r3(r1.numerator, r2.denominator);
+    Rational r4(r2.numerator, r1.denominator);
+    Rational r5;
+    r5.denominator = r3.denominator * r4.denominator;
+    r5.numerator = r3.numerator * r4.numerator;
+    return r5;
 }
 
 Rational operator / (const Rational &r1, const Rational &r2)
 {
-    Rational r3;
-    r3.denominator = r1.denominator * r2.numerator;
-    r3.numerator = r1.numerator * r2.denominator;
-    reduction(r3.numerator, r3.denominator);
-    return r3;
+    Rational r3(r1.numerator, r2.numerator);
+    Rational r4(r2.denominator, r1.denominator);
+    Rational r5;
+    r5.denominator = r3.denominator * r4.denominator;
+    r5.numerator = r3.numerator * r4.numerator;
+    return r5;
 }
 
 bool operator ==(const Rational &r1, const Rational &r2)

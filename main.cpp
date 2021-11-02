@@ -198,11 +198,11 @@ bool Test_strassen_matrix_mul(int from, int to, long long d)
         auto time2 = std::chrono::duration_cast<std::chrono::milliseconds>(end2 - start2);
 
 
-        std::cout << "Execution time of multiplication by normal algorithm: " << time1.count() << std::endl;
-        std::cout << "Execution time of multiplication by Strassen's algorithm: " << time2.count() << std::endl;
+        std::cout << "Execution time of multiplication by normal algorithm: " << time1.count() << " ms" << std::endl;
+        std::cout << "Execution time of multiplication by Strassen's algorithm: " << time2.count() << " ms" << std::endl;
 
-
-        std::cout << "Test " << k-from << ": ";
+        
+        std::cout << "Test " << k << ": ";
         if(mTest3==mTest4)
         {
             std::cout << "Passed\n\n";
