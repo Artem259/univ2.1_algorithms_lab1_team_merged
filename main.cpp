@@ -173,12 +173,12 @@ bool Test_inverse_byLU()
     std::cout << "\nSection passed\n";
     return true;
 }
-bool Test_strassen_matrix_mul(int kMax, long long d)
+bool Test_strassen_matrix_mul(int from, int to, long long d)
 {
+    if(from>to) return false;
     std::cout<<"Section 1 [strassen_matrix_mul]\n\n";
-    for (int k = 1; k <= kMax; k++)
+    for (int k = from; k <= to; k++)
     {
-        std::cout << "Test " << k << ": ";
         RationalMatrix mTest1(k, k);
         mTest1.random(d);
 
@@ -201,9 +201,8 @@ bool Test_strassen_matrix_mul(int kMax, long long d)
         std::cout << "Execution time of multiplication by normal algorithm: " << time1.count() << std::endl;
         std::cout << "Execution time of multiplication by Strassen's algorithm: " << time2.count() << std::endl;
 
-        std::cout << "Equality: " << ((mTest3==mTest4)?"true":"false") << std::endl;
 
-        std::cout << "Test " << k-1 << ": ";
+        std::cout << "Test " << k-from << ": ";
         if(mTest3==mTest4)
         {
             std::cout << "Passed\n\n";
@@ -225,7 +224,7 @@ int main()
     std::cout<<"----------------------------------------------------------------------------\n";
     if(!Test_inverse_byLU()) return 1;
     std::cout<<"----------------------------------------------------------------------------\n";
-    if(!Test_strassen_matrix_mul(5, 12)) return 1;
+    if(!Test_strassen_matrix_mul(65,69, 12)) return 1;
     std::cout<<"----------------------------------------------------------------------------\n";
     return 0;
 }
