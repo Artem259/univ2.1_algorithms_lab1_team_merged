@@ -18,7 +18,7 @@ public:
     std::vector<Rational>& operator ()(const size_t &row); //повертяє посилання на рядок матриці
     Rational& operator ()(const size_t &row, const size_t &col); //повертяє посилання на елемент матриці
 
-    //Поляко Артем
+    //Поляков Артем
     RationalMatrix inverse_GaussJordan() const; //повертає обернену матрицю
 
     //Дзюгал Ольга
