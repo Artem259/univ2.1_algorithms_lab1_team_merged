@@ -22,9 +22,12 @@ public:
     RationalMatrix inverse_GaussJordan() const; //повертає обернену матрицю
 
     //Дзюгал Ольга
+     //-----------------------------------------------------------------------------------------------------------
     RationalMatrix inverse_byLU(); //повертає обернену матрицю, використовуючи метод LU-розкладу
     void col_L_inverse(RationalMatrix &L, std::vector<Rational>& E, std::vector<Rational>& Z, const size_t &rows);
+    bool matrix_isE(RationalMatrix& P, const size_t& rows);
     void col_A_inverse(RationalMatrix &U, std::vector<Rational>& Z, std::vector<Rational>& B, const size_t &rows);
+    //-------------------------------------------------------------------------------------------------------------
 
     friend std::ostream& operator <<(std::ostream &ofs, const RationalMatrix &matrix);
     friend bool operator ==(const RationalMatrix &m1, const RationalMatrix &m2);
