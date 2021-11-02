@@ -82,6 +82,7 @@ RationalMatrix RationalMatrix::inverse_byLU() {
     }
     bool check = matrix_isE(P, rows);
     if (check) return B;
-   // return B * P - тут має бути множення матриць методом Штрассена
+    quick_matrix_mul(B, P, E, rows);
+    return E;
 }
 //-----------------------------------------------------------------------------------
