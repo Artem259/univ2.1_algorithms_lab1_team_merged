@@ -69,7 +69,7 @@ bool Test_inverse_GaussJordan()
     */
     //-------------------------------------------------------------------------------------------------//
     RationalMatrix res(1,1);
-    std::cout<<"Section 1 [inverse_GaussJordan]\n\n";
+    std::cout<<"Section 0 [inverse_GaussJordan]\n\n";
     for(size_t i=0; i<input.size(); i++)
     {
         std::cout<<"Test "<<i<<": ";
@@ -176,7 +176,7 @@ bool Test_inverse_byLU()
 bool Test_strassen_matrix_mul(int from, int to, long long d)
 {
     if(from>to) return false;
-    std::cout<<"Section 1 [strassen_matrix_mul]\n\n";
+    std::cout<<"Section 2 [strassen_matrix_mul]\n\n";
     for (int k = from; k <= to; k++)
     {
         RationalMatrix mTest1(k, k);
