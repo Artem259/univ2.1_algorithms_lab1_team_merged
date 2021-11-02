@@ -1,7 +1,3 @@
-//
-// Created by Artem Poliakov on 11.10.2021.
-//
-
 #ifndef MATRIX_H
 #define MATRIX_H
 
