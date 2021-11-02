@@ -54,7 +54,6 @@ RationalMatrix RationalMatrix::inverse_byLU() {
     }
     for (size_t i = 0; i < rows; i++) //цикл по всім рядкам
     {
-        std::cout << i << std::endl;
         if (U(i, i).numerator == 0) //діагональний елемент = 0 (треба переставляти рядки)
         {
             size_t c = i;
