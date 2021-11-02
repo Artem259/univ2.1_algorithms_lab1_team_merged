@@ -14,6 +14,11 @@ long long gcd(long long x, long long y) // Euclidean algorithm
     return gcd(y, x % y);
 }
 
+long long lcm(long long x, long long y)
+{
+    return (x*y)/gcd(x, y);
+}
+
 void reduction(long long &x, long long &y)
 {
     long long nod = gcd(x, y);
